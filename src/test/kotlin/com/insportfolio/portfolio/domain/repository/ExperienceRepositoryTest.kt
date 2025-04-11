@@ -83,4 +83,10 @@ class ExperienceRepositoryTest(
 
         println("--- findAllByIsActive 테스트 종료")
     }
+
+//    @Test
+//    fun test() {
+//        val findById = experienceRepository.findById(1)
+//        println(findById.isPresent)
+//    }
 }
