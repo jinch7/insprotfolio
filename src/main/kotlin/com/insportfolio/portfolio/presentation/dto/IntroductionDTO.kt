@@ -1,3 +1,11 @@
 package com.insportfolio.portfolio.presentation.dto
 
-class IntroductionDTO
+import com.insportfolio.portfolio.domain.entity.Introduction
+
+data class IntroductionDTO(
+    val content: String,
+) {
+    constructor(introduction: Introduction) : this(
+        content = introduction.content,
+    )
+}
