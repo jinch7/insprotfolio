@@ -2,7 +2,6 @@ package com.insportfolio.portfolio.admin.advice
 
 import com.insportfolio.portfolio.admin.exception.AdminException
 import org.slf4j.LoggerFactory
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -33,6 +32,6 @@ class AdminApiControllerAdvice {
     fun handlerException(e: Exception): ResponseEntity<String> {
         log.info(e.message, e)
 
-        return ResponseEntity.internalServerError().body("[system error]")
+        return ResponseEntity.internalServerError().body("A system error occurred.")
     }
 }
