@@ -1,18 +1,29 @@
 package com.insportfolio.portfolio.presentation.repository
 
-import com.insportfolio.portfolio.domain.entity.*
-import com.insportfolio.portfolio.domain.repository.*
+import com.insportfolio.portfolio.domain.entity.Achievement
+import com.insportfolio.portfolio.domain.entity.Experience
+import com.insportfolio.portfolio.domain.entity.Introduction
+import com.insportfolio.portfolio.domain.entity.Link
+import com.insportfolio.portfolio.domain.entity.Project
+import com.insportfolio.portfolio.domain.entity.Skill
+import com.insportfolio.portfolio.domain.repository.AchievementRepository
+import com.insportfolio.portfolio.domain.repository.ExperienceRepository
+import com.insportfolio.portfolio.domain.repository.IntroductionRepository
+import com.insportfolio.portfolio.domain.repository.LinkRepository
+import com.insportfolio.portfolio.domain.repository.ProjectRepository
+import com.insportfolio.portfolio.domain.repository.SkillRepository
 import org.springframework.stereotype.Repository
 
 @Repository
 class PresentationRepository(
     private val achievementRepository: AchievementRepository,
+    private val experienceRepository: ExperienceRepository,
     private val introductionRepository: IntroductionRepository,
     private val linkRepository: LinkRepository,
-    private val skillRepository: SkillRepository,
     private val projectRepository: ProjectRepository,
-    private val experienceRepository: ExperienceRepository,
+    private val skillRepository: SkillRepository
 ) {
+
     fun getActiveAchievements(): List<Achievement> {
         return achievementRepository.findAllByIsActive(true)
     }
@@ -36,4 +47,5 @@ class PresentationRepository(
     fun getActiveSkills(): List<Skill> {
         return skillRepository.findAllByIsActive(true)
     }
+
 }

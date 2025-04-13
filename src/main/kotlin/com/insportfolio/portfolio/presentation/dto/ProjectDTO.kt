@@ -2,7 +2,7 @@ package com.insportfolio.portfolio.presentation.dto
 
 import com.insportfolio.portfolio.domain.entity.Project
 
-class ProjectDTO(
+data class ProjectDTO(
     val name: String,
     val description: String,
     val startYearMonth: String,
@@ -13,7 +13,7 @@ class ProjectDTO(
     constructor(project: Project) : this(
         name = project.name,
         description = project.description,
-        startYearMonth = "${project.startYear}${project.startYear}",
+        startYearMonth = "${project.startYear}.${project.startMonth}", // 2023.9
         endYearMonth = project.getEndYearMonth(),
         details = project.details.filter { it.isActive }.map { ProjectDetailDTO(it) },
         skills = project.skills.map { it.skill }.filter { it.isActive }.map { SkillDTO(it) }

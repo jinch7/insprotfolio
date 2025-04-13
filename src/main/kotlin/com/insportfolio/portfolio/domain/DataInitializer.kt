@@ -17,6 +17,7 @@ class DataInitializer(
     private val skillRepository: SkillRepository,
     private val projectRepository: ProjectRepository,
     private val experienceRepository: ExperienceRepository,
+    private val accountRepository: AccountRepository
 ) {
 
     @PostConstruct
@@ -160,5 +161,11 @@ class DataInitializer(
             )
         )
         projectRepository.saveAll(mutableListOf(project1, project2))
+
+        val account = Account(
+            loginId = "admin",
+            pw = "\$2a\$10\$G0CrNpUeHdmhaaDao4P7hOsdzwhHbdn.HEzE2AJTVZnX6NMH1pvaq"
+        )
+        accountRepository.save(account)
     }
 }

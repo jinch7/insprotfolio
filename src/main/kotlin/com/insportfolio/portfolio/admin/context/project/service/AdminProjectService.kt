@@ -1,8 +1,9 @@
+
 package com.insportfolio.portfolio.admin.context.project.service
 
 import com.insportfolio.portfolio.admin.context.project.form.ProjectForm
 import com.insportfolio.portfolio.admin.data.TableDTO
-import com.insportfolio.portfolio.admin.exception.AdminBadRequestException
+import com.insportfolio.portfolio.admin.exception.AdminBadReqeustException
 import com.insportfolio.portfolio.domain.entity.Project
 import com.insportfolio.portfolio.domain.entity.ProjectDetail
 import com.insportfolio.portfolio.domain.repository.ProjectRepository
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 class AdminProjectService(
     private val projectRepository: ProjectRepository
 ) {
+
     fun getProjectTable(): TableDTO {
         val classInfo = Project::class
         val entities = projectRepository.findAll()
@@ -23,7 +25,7 @@ class AdminProjectService(
     fun getProjectDetailTable(id: Long?): TableDTO {
         val classInfo = ProjectDetail::class
         val entities = if (id != null) projectRepository.findById(id)
-            .orElseThrow { throw AdminBadRequestException("No data was found for ID ${id}.") }
+            .orElseThrow { throw AdminBadReqeustException("ID ${id}에 해당하는 데이터를 찾을 수 없습니다.") }
             .details else emptyList()
 
         return TableDTO.from(classInfo, entities)
@@ -31,6 +33,7 @@ class AdminProjectService(
 
     @Transactional
     fun save(form: ProjectForm) {
+
         val projectDetails = form.details
             ?.map { detail -> detail.toEntity() }
             ?.toMutableList()
@@ -43,16 +46,17 @@ class AdminProjectService(
 
     @Transactional
     fun update(id: Long, form: ProjectForm) {
+
         val project = projectRepository.findById(id)
-            .orElseThrow { throw AdminBadRequestException("No data was found for ID ${id}.") }
+            .orElseThrow { throw AdminBadReqeustException("ID ${id}에 해당하는 데이터를 찾을 수 없습니다.") }
 
         project.update(
             name = form.name,
             description = form.description,
             startYear = form.startYear,
             startMonth = form.startMonth,
-            endMonth = form.endMonth,
             endYear = form.endYear,
+            endMonth = form.endMonth,
             isActive = form.isActive
         )
 

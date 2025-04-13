@@ -4,10 +4,11 @@ import com.insportfolio.portfolio.domain.entity.Introduction
 import jakarta.validation.constraints.NotBlank
 
 data class IntroductionForm(
-    @field:NotBlank(message = "Required value.")
+
+    @field:NotBlank(message = "필수값입니다.")
     val content: String,
 
-    val isActive: Boolean,
+    val isActive: Boolean
 ) {
     fun toEntity(): Introduction {
         return Introduction(

@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/admin/introduction")
 class AdminIntroductionViewController(
-    private val adminIntroductionService: AdminIntroductionService,
+    private val adminIntroductionService: AdminIntroductionService
 ) {
+
     @GetMapping
     fun introduction(model: Model): String {
+
         val formElements = listOf<FormElementDTO>(
             TextFormElementDTO("content", 10),
-            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString())),
+            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString()))
         )
         model.addAttribute("formElements", formElements)
 

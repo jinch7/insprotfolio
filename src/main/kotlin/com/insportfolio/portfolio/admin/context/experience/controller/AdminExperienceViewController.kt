@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 class AdminExperienceViewController(
     private val adminExperienceService: AdminExperienceService
 ) {
+
     @GetMapping
     fun experience(model: Model): String {
+
         val formElements = listOf<FormElementDTO>(
             TextFormElementDTO("title", 4),
             TextFormElementDTO("description", 8),
@@ -23,18 +25,19 @@ class AdminExperienceViewController(
             SelectFormElementDTO("startMonth", 2, (1..12).toList()),
             SelectFormElementDTO("endYear", 3, (2010..2030).toList()),
             SelectFormElementDTO("endMonth", 2, (1..12).toList()),
-            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString())),
+            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString()))
         )
         model.addAttribute("formElements", formElements)
 
-        val detailFormElement = listOf<FormElementDTO>(
+        val detailFormElements = listOf<FormElementDTO>(
             TextFormElementDTO("content", 10),
-            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString())),
+            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString()))
         )
-        model.addAttribute("detailFormElements", detailFormElement)
+        model.addAttribute("detailFormElements", detailFormElements)
 
         val table = adminExperienceService.getExperienceTable()
         model.addAttribute("table", table)
+
 
         val detailTable = adminExperienceService.getExperienceDetailTable(null)
         model.addAttribute("detailTable", detailTable)

@@ -7,17 +7,18 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive
 
 data class ProjectForm(
-    @field:NotBlank(message = "Required value.")
+
+    @field:NotBlank(message = "필수값입니다.")
     val name: String,
 
-    @field:NotBlank(message = "Required value.")
+    @field:NotBlank(message = "필수값입니다.")
     val description: String,
 
-    @field:Positive(message = "Must be greater than 0.")
+    @field:Positive(message = "0보다 커야 합니다.")
     val startYear: Int,
 
-    @field:Min(value = 1, message = "The minimum value is 1.")
-    @field:Max(value = 12, message = "The maximum value is 12.")
+    @field:Min(value = 1, message = "최솟값은 1입니다.")
+    @field:Max(value = 12, message = "최댓값은 12입니다.")
     val startMonth: Int,
 
     val endYear: Int?,
@@ -27,6 +28,7 @@ data class ProjectForm(
     val isActive: Boolean,
 
     val details: List<ProjectDetailForm>?
+
 ) {
     fun toEntity(): Project {
         return Project(
@@ -36,7 +38,7 @@ data class ProjectForm(
             startMonth = this.startMonth,
             endYear = this.endYear,
             endMonth = this.endMonth,
-            isActive = this.isActive,
+            isActive = this.isActive
         )
     }
 }

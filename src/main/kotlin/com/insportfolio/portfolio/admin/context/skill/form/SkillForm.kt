@@ -4,13 +4,15 @@ import com.insportfolio.portfolio.domain.entity.Skill
 import jakarta.validation.constraints.NotBlank
 
 data class SkillForm(
-    @field:NotBlank(message = "Required value.")
+
+    @field:NotBlank(message = "필수값입니다.")
     val name: String,
 
-    @field:NotBlank(message = "Required value.")
+    @field:NotBlank(message = "필수값입니다.")
     val type: String,
 
-    val isActive: Boolean,
+    val isActive: Boolean
+
 ) {
     fun toEntity(): Skill {
         return Skill(

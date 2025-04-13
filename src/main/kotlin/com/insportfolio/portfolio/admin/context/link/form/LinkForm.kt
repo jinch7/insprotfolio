@@ -4,13 +4,15 @@ import com.insportfolio.portfolio.domain.entity.Link
 import jakarta.validation.constraints.NotBlank
 
 data class LinkForm(
-    @field:NotBlank(message = "Required value.")
+
+    @field:NotBlank(message = "필수값입니다.")
     val name: String,
 
-    @field:NotBlank(message = "Required value.")
+    @field:NotBlank(message = "필수값입니다.")
     val content: String,
 
-    val isActive: Boolean,
+    val isActive: Boolean
+
 ) {
     fun toEntity(): Link {
         return Link(

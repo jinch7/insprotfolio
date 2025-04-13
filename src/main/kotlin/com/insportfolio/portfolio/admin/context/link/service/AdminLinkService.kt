@@ -9,8 +9,9 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AdminLinkService(
-    private val linkRepository: LinkRepository,
+    private val linkRepository: LinkRepository
 ) {
+
     fun getLinkTable(): TableDTO {
         val classInfo = Link::class
         val entities = linkRepository.findAll()
@@ -21,12 +22,14 @@ class AdminLinkService(
     @Transactional
     fun save(form: LinkForm) {
         val link = form.toEntity()
+
         linkRepository.save(link)
     }
 
     @Transactional
     fun update(id: Long, form: LinkForm) {
         val link = form.toEntity(id)
+
         linkRepository.save(link)
     }
 }

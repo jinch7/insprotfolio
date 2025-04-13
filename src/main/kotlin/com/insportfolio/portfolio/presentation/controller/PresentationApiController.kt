@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RestController
 class PresentationApiController(
     private val presentationService: PresentationService
 ) {
+
     @GetMapping("/test")
     fun test(): String {
         return "OK"
     }
 
     @GetMapping("/v1/introductions")
-    fun getIntroduction(): List<IntroductionDTO> {
+    fun getIntroductions(): List<IntroductionDTO> {
         return presentationService.getIntroductions()
     }
 
@@ -38,4 +39,5 @@ class PresentationApiController(
     fun getProjects(): List<ProjectDTO> {
         return presentationService.getProjects()
     }
+
 }

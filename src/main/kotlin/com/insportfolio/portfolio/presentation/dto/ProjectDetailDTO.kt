@@ -2,9 +2,9 @@ package com.insportfolio.portfolio.presentation.dto
 
 import com.insportfolio.portfolio.domain.entity.ProjectDetail
 
-class ProjectDetailDTO(
+data class ProjectDetailDTO(
     val content: String,
-    val url: String?,
+    val url: String?
 ) {
     constructor(projectDetail: ProjectDetail) : this(
         content = projectDetail.content,

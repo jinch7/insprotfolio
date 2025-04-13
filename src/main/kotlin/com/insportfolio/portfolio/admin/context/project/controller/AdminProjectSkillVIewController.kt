@@ -10,21 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 @RequestMapping("/admin/project/skill")
-class AdminProjectSkillVIewController(
-    private val adminProjectSkillService: AdminProjectSkillService,
+class AdminProjectSkillViewController(
+    private val adminProjectSkillService: AdminProjectSkillService
 ) {
+
     @GetMapping
     fun projectSkill(model: Model): String {
-        val projectList = adminProjectSkillService.getProjectList()
+
+        val proejctList = adminProjectSkillService.getProjectList()
         val skillList = adminProjectSkillService.getSkillList()
 
-        val fromElements = listOf<FormElementDTO>(
-            SelectFormElementDTO("project", 8, projectList),
-            SelectFormElementDTO("skill", 4, skillList),
+        val formElements = listOf<FormElementDTO>(
+            SelectFormElementDTO("project", 8, proejctList),
+            SelectFormElementDTO("skill", 4, skillList)
         )
-        model.addAttribute("fromElements", fromElements)
+        model.addAttribute("formElements", formElements)
 
-        val table = adminProjectSkillService.getProjectSkillTable()
+        val table = adminProjectSkillService.getProejectSkillTable()
         model.addAttribute("table", table)
         model.addAttribute("detailTable", null)
 

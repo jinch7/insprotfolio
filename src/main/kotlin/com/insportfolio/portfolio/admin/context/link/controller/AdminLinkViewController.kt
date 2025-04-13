@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping
 class AdminLinkViewController(
     private val adminLinkService: AdminLinkService
 ) {
+
     @GetMapping
     fun link(model: Model): String {
+
         val formElements = listOf<FormElementDTO>(
             TextFormElementDTO("name", 2),
             TextFormElementDTO("content", 8),
-            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString())),
+            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString()))
         )
         model.addAttribute("formElements", formElements)
 

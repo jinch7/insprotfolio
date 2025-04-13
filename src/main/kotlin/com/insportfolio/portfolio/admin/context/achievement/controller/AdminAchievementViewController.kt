@@ -13,16 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/admin/achievement")
 class AdminAchievementViewController(
-    private val adminAchievementService: AdminAchievementService,
+    private val adminAchievementService: AdminAchievementService
 ) {
+
     @GetMapping
     fun achievement(model: Model): String {
+
         val formElements = listOf<FormElementDTO>(
             TextFormElementDTO("title", 4),
             TextFormElementDTO("description", 8),
-            DateFormElementDTO("achievement", 5),
+            DateFormElementDTO("achievedDate", 5),
             TextFormElementDTO("host", 5),
-            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString())),
+            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString()))
         )
         model.addAttribute("formElements", formElements)
 

@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/admin/skill")
 class AdminSkillViewController(
-    private val adminSkillService: AdminSkillService,
+    private val adminSkillService: AdminSkillService
 ) {
+
     @GetMapping
-    fun link(model: Model): String {
+    fun skill(model: Model): String {
+
         val formElements = listOf<FormElementDTO>(
             TextFormElementDTO("name", 2),
             SelectFormElementDTO("type", 2, SkillType.values().map { it.name }.toList()),
-            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString())),
+            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString()))
         )
         model.addAttribute("formElements", formElements)
 

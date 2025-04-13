@@ -4,14 +4,15 @@ import com.insportfolio.portfolio.domain.entity.ProjectDetail
 import jakarta.validation.constraints.NotBlank
 
 data class ProjectDetailForm(
+
     val id: Long,
 
-    @field:NotBlank(message = "Required value.")
+    @field:NotBlank(message = "필수값입니다.")
     val content: String,
 
     val url: String?,
 
-    val isActive: Boolean,
+    val isActive: Boolean
 ) {
     fun toEntity(): ProjectDetail {
         return ProjectDetail(

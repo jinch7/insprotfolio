@@ -10,11 +10,12 @@ class ResumeDTO(
     achievements: List<Achievement>,
     skills: List<Skill>
 ) {
+
     var experiences: List<ExperienceDTO> = experiences.map {
         ExperienceDTO(
             title = it.title,
             description = it.description,
-            startYearMonth = "${it.startYear}${it.startYear}",
+            startYearMonth = "${it.startYear}.${it.startMonth}",
             endYearMonth = it.getEndYearMonth(),
             details = it.details.filter { it.isActive }.map { it.content }
         )
@@ -25,11 +26,12 @@ class ResumeDTO(
             title = it.title,
             description = it.description,
             host = it.host,
-            achievement = it.achievedDate
-                ?.format(DateTimeFormatter.ISO_LOCAL_DATE) // yyyy-mm-dd
-                ?.replace("-", ".") // yyyy.mm.dd
+            achievedDate = it.achievedDate
+                ?.format(DateTimeFormatter.ISO_LOCAL_DATE)
+                ?.replace("-", ".")
         )
     }
 
     var skills: List<SkillDTO> = skills.map { SkillDTO(it) }
+
 }

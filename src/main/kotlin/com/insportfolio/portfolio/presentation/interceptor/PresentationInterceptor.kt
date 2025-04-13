@@ -11,13 +11,10 @@ import org.springframework.web.servlet.HandlerInterceptor
 class PresentationInterceptor(
     private val httpInterfaceRepository: HttpInterfaceRepository
 ) : HandlerInterceptor {
-    override fun afterCompletion(
-        request: HttpServletRequest,
-        response: HttpServletResponse,
-        handler: Any,
-        ex: Exception?
-    ) {
+
+    override fun afterCompletion(request: HttpServletRequest, response: HttpServletResponse, handler: Any, ex: Exception?) {
         val httpInterface = HttpInterface(request)
         httpInterfaceRepository.save(httpInterface)
     }
+
 }

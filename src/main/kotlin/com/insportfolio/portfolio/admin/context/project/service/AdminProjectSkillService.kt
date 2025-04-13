@@ -1,9 +1,9 @@
 package com.insportfolio.portfolio.admin.context.project.service
 
-import com.insportfolio.portfolio.admin.context.project.form.ProjectSkilllForm
+import com.insportfolio.portfolio.admin.context.project.form.ProjectSkillForm
 import com.insportfolio.portfolio.admin.data.TableDTO
-import com.insportfolio.portfolio.admin.exception.AdminBadRequestException
-import com.insportfolio.portfolio.admin.exception.AdminInternalServerException
+import com.insportfolio.portfolio.admin.exception.AdminBadReqeustException
+import com.insportfolio.portfolio.admin.exception.AdminInternalServerErrorException
 import com.insportfolio.portfolio.domain.entity.ProjectSkill
 import com.insportfolio.portfolio.domain.repository.ProjectRepository
 import com.insportfolio.portfolio.domain.repository.ProjectSkillRepository
@@ -17,8 +17,10 @@ class AdminProjectSkillService(
     private val skillRepository: SkillRepository,
     private val projectSkillRepository: ProjectSkillRepository
 ) {
+
     @Transactional
-    fun getProjectSkillTable(): TableDTO {
+    fun getProejectSkillTable(): TableDTO {
+
         val projects = projectRepository.findAll()
         val columns = mutableListOf<String>(
             "id", "projectId", "projectName", "skillId", "skillName",
@@ -55,16 +57,19 @@ class AdminProjectSkillService(
     }
 
     @Transactional
-    fun save(form: ProjectSkilllForm) {
+    fun save(form: ProjectSkillForm) {
+
+        // 이미 매핑된 Project - Skill 여부 검증
         val projectId = parseId(form.project)
         val skillId = parseId(form.skill)
         projectSkillRepository.findByProjectIdAndSkillId(projectId, skillId)
-            .ifPresent { throw AdminBadRequestException("Data that has already been mapped.") }
+            .ifPresent { throw AdminBadReqeustException("이미 매핑된 데이터입니다.") }
 
+        // 유효한 ProjectSkill 생성
         val project = projectRepository.findById(projectId)
-            .orElseThrow { throw AdminBadRequestException("No data was found for ID ${projectId}.") }
+            .orElseThrow { throw AdminBadReqeustException("ID ${projectId}에 해당하는 데이터를 찾을 수 없습니다.") }
         val skill = skillRepository.findById(skillId)
-            .orElseThrow { throw AdminBadRequestException("No data was found for ID ${skillId}.") }
+            .orElseThrow { throw AdminBadReqeustException("ID ${skillId}에 해당하는 데이터를 찾을 수 없습니다.") }
         val projectSkill = ProjectSkill(
             project = project,
             skill = skill
@@ -80,7 +85,7 @@ class AdminProjectSkillService(
 
             return id
         } catch (e: Exception) {
-            throw AdminInternalServerException("An error occurred while extracting the ID.")
+            throw AdminInternalServerErrorException("ID 추출 중 오류가 발생했습니다.")
         }
     }
 

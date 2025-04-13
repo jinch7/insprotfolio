@@ -8,11 +8,13 @@ import java.time.LocalDateTime
 
 @MappedSuperclass
 abstract class BaseEntity {
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
-    var createdDateTime: LocalDateTime? = LocalDateTime.now()
+    var createdDateTime: LocalDateTime = LocalDateTime.now()
 
     @LastModifiedDate
     @Column(nullable = false)
-    var updatedDateTime: LocalDateTime? = LocalDateTime.now()
+    var updatedDateTime: LocalDateTime = LocalDateTime.now()
+
 }

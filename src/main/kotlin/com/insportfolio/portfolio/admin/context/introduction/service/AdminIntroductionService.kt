@@ -9,8 +9,9 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AdminIntroductionService(
-    private val introductionRepository: IntroductionRepository,
+    private val introductionRepository: IntroductionRepository
 ) {
+
     fun getIntroductionTable(): TableDTO {
         val classInfo = Introduction::class
         val entities = introductionRepository.findAll()

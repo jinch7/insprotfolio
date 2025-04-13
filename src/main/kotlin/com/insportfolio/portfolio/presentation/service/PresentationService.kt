@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 class PresentationService(
     private val presentationRepository: PresentationRepository
 ) {
+
     @Transactional(readOnly = true)
     fun getIntroductions(): List<IntroductionDTO> {
         val introductions = presentationRepository.getActiveIntroductions()
@@ -28,6 +29,7 @@ class PresentationService(
 
     @Transactional(readOnly = true)
     fun getResume(): ResumeDTO {
+
         val experiences = presentationRepository.getActiveExperiences()
         val achievements = presentationRepository.getActiveAchievements()
         val skills = presentationRepository.getActiveSkills()
@@ -45,4 +47,5 @@ class PresentationService(
 
         return projects.map { ProjectDTO(it) }
     }
+
 }
