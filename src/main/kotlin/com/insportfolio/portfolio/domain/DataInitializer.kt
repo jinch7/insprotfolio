@@ -140,10 +140,12 @@ class DataInitializer(
         val aws = Skill(name = "AmazonWebService", type = SkillType.TOOL.name, isActive = true)
         val gcp = Skill(name = "GoogleCloudPlatform", type = SkillType.TOOL.name, isActive = true)
         val docker = Skill(name = "Docker", type = SkillType.TOOL.name, isActive = true)
+        val nginx = Skill(name = "Nginx", type = SkillType.TOOL.name, isActive = true)
         skillRepository.saveAll(
             mutableListOf(
                 java, kotlin, python, js,
-                spring, react, django, mysql, oracle, firebase, h2, vscode, intelliJ, sts, dbeaver, aws, gcp, docker
+                spring, react, django, mysql, oracle, firebase, h2,
+                vscode, intelliJ, sts, dbeaver, aws, gcp, docker, nginx
             )
         )
 
