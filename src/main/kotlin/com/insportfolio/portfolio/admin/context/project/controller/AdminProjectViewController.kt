@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 class AdminProjectViewController(
     private val adminProjectService: AdminProjectService
 ) {
+
     @GetMapping
     fun project(model: Model): String {
+
         val formElements = listOf<FormElementDTO>(
             TextFormElementDTO("name", 4),
             TextFormElementDTO("description", 8),
@@ -23,19 +25,20 @@ class AdminProjectViewController(
             SelectFormElementDTO("startMonth", 2, (1..12).toList()),
             SelectFormElementDTO("endYear", 3, (2010..2030).toList()),
             SelectFormElementDTO("endMonth", 2, (1..12).toList()),
-            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString())),
+            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString()))
         )
         model.addAttribute("formElements", formElements)
 
-        val detailFormElement = listOf<FormElementDTO>(
+        val detailFormElements = listOf<FormElementDTO>(
             TextFormElementDTO("content", 4),
             TextFormElementDTO("url", 6),
-            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString())),
+            SelectFormElementDTO("isActive", 2, listOf(true.toString(), false.toString()))
         )
-        model.addAttribute("detailFormElements", detailFormElement)
+        model.addAttribute("detailFormElements", detailFormElements)
 
         val table = adminProjectService.getProjectTable()
         model.addAttribute("table", table)
+
 
         val detailTable = adminProjectService.getProjectDetailTable(null)
         model.addAttribute("detailTable", detailTable)
