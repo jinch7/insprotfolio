@@ -16,7 +16,6 @@
     const editButton = "<button type=\"button\" class=\"btn btn-ligit\" data-bs-toggle=\"modal\" data-bs-target=\"#" + pageName + "Modal\" onclick=\"openEdit(this)\"><i class=\"bi bi-pencil\"></button>"
     const deleteButton = "<button type=\"button\" class=\"btn btn-ligit\" onclick=\"deleteRecord(this)\"><i class=\"bi bi-x-square\"></button>"
 
-
     // 데이터테이블 초기화
     var table = [[${table}]];
     var datatable = createDatatable(table.name, table.columns, table.records, editable, deletable, hasDetails);
