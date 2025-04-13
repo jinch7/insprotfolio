@@ -28,13 +28,13 @@ class DataInitializer(
             Achievement(
                 title = "SQL開発者(SQL개발자)",
                 description = "データベース、SQLなど",
-                host = "韓国データ産業振興院(한국산업인력공단)",
+                host = "韓国データ産業振興院(한국데이터산업진흥원)",
                 achievedDate = LocalDate.of(2023, 7, 1),
                 isActive = true,
             ),
             Achievement(
                 title = "情報処理技師(정보처리기사)",
-                description = "データ構造、データベース、オペレーティングシステムなど、日本の「応用情報技術者資格」相当\n",
+                description = "データ構造、データベース、オペレーティングシステムなど、日本の「応用情報技術者資格」相当",
                 host = "韓国産業人力公団(한국산업인력공단)",
                 achievedDate = LocalDate.of(2023, 11, 1),
                 isActive = true,
@@ -139,7 +139,7 @@ class DataInitializer(
         val dbeaver = Skill(name = "DBeaver", type = SkillType.TOOL.name, isActive = true)
         val aws = Skill(name = "AmazonWebService", type = SkillType.TOOL.name, isActive = true)
         val gcp = Skill(name = "GoogleCloudPlatform", type = SkillType.TOOL.name, isActive = true)
-        val docker = Skill(name = "docker", type = SkillType.TOOL.name, isActive = true)
+        val docker = Skill(name = "Docker", type = SkillType.TOOL.name, isActive = true)
         skillRepository.saveAll(
             mutableListOf(
                 java, kotlin, python, js,
@@ -148,8 +148,8 @@ class DataInitializer(
         )
 
         val project1 = Project(
-            name = "農産物ショッピングモール 「くだモン」",
-            description = "都市のコンシューマーと生産地をつなぎ、新鮮な商品をコンシューマーに届け、関連レシピも一緒に提供するショッピングモール 「くだモン」",
+            name = "農産物ショッピングモール 「くたモン」",
+            description = "都市のコンシューマーと生産地をつなぎ、新鮮な商品をコンシューマーに届け、関連レシピも一緒に提供するショッピングモール 「くたモン」",
             startYear = 2024,
             startMonth = 8,
             endYear = 2024,
@@ -159,7 +159,7 @@ class DataInitializer(
         project1.addDetails(
             mutableListOf(
                 ProjectDetail(content = "購入者と販売者の登録、農産物の売買、購入者と販売者間のチャット、お店の管理ページ、農産物関連レシピ提供", url = null, isActive = true),
-                ProjectDetail(content = "チームリーダ、プロジェクトの企画、ERDの設計、注文及びレシピ関連機能、サイト全般的なデザイン実装", url = null, isActive = true),
+                ProjectDetail(content = "チームリーダ、プロジェクトの企画、ERDの設計、注文及びレシピ関連機能、サイト全般的なデザイン実装担当", url = null, isActive = true),
 
                 )
         )
