@@ -1,7 +1,12 @@
 package com.insportfolio.portfolio.admin.context.project.service
 
+import com.insportfolio.portfolio.admin.context.project.form.ProjectSkilllForm
 import com.insportfolio.portfolio.admin.data.TableDTO
+import com.insportfolio.portfolio.admin.exception.AdminBadRequestException
+import com.insportfolio.portfolio.admin.exception.AdminInternalServerException
+import com.insportfolio.portfolio.domain.entity.ProjectSkill
 import com.insportfolio.portfolio.domain.repository.ProjectRepository
+import com.insportfolio.portfolio.domain.repository.ProjectSkillRepository
 import com.insportfolio.portfolio.domain.repository.SkillRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -9,7 +14,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class AdminProjectSkillService(
     private val projectRepository: ProjectRepository,
-    private val skillRepository: SkillRepository
+    private val skillRepository: SkillRepository,
+    private val projectSkillRepository: ProjectSkillRepository
 ) {
     @Transactional
     fun getProjectSkillTable(): TableDTO {
@@ -46,5 +52,40 @@ class AdminProjectSkillService(
         val skills = skillRepository.findAll()
 
         return skills.map { "${it.id} (${it.name})" }.toList()
+    }
+
+    @Transactional
+    fun save(form: ProjectSkilllForm) {
+        val projectId = parseId(form.project)
+        val skillId = parseId(form.skill)
+        projectSkillRepository.findByProjectIdAndSkillId(projectId, skillId)
+            .ifPresent { throw AdminBadRequestException("Data that has already been mapped.") }
+
+        val project = projectRepository.findById(projectId)
+            .orElseThrow { throw AdminBadRequestException("No data was found for ID ${projectId}.") }
+        val skill = skillRepository.findById(skillId)
+            .orElseThrow { throw AdminBadRequestException("No data was found for ID ${skillId}.") }
+        val projectSkill = ProjectSkill(
+            project = project,
+            skill = skill
+        )
+
+        project.skills.add(projectSkill)
+    }
+
+    private fun parseId(line: String): Long {
+        try {
+            val endIndex = line.indexOf(" ") - 1
+            val id = line.slice(0..endIndex).toLong()
+
+            return id
+        } catch (e: Exception) {
+            throw AdminInternalServerException("An error occurred while extracting the ID.")
+        }
+    }
+
+    @Transactional
+    fun delete(id: Long) {
+        projectSkillRepository.deleteById(id)
     }
 }
